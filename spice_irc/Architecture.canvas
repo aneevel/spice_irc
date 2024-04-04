@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"7e68dc83d1f9e040","x":-740,"y":-20,"width":1170,"height":100,"type":"group","label":"Top-Level Crates"},
+		{"id":"f8d612e61a314375","x":-200,"y":-220,"width":250,"height":60,"type":"text","text":"Spice_IRC\n"},
+		{"id":"d98941822bf326fe","x":-200,"y":0,"width":250,"height":60,"type":"text","text":"SpiceLog\n"},
+		{"id":"d36a0aa64d9dc6e0","x":160,"y":0,"width":250,"height":60,"type":"text","text":"SpiceIRC_TUI"},
+		{"id":"e2d4394c17c905e2","x":-560,"y":0,"width":250,"height":60,"type":"text","text":"SpiceIRC_Client\n"}
+	],
+	"edges":[
+		{"id":"84f823effc203250","fromNode":"f8d612e61a314375","fromSide":"bottom","toNode":"d98941822bf326fe","toSide":"top"},
+		{"id":"35f2e1de2ddcc92c","fromNode":"f8d612e61a314375","fromSide":"bottom","toNode":"e2d4394c17c905e2","toSide":"top"},
+		{"id":"57bb190cc17d52e5","fromNode":"f8d612e61a314375","fromSide":"bottom","toNode":"d36a0aa64d9dc6e0","toSide":"top"}
+	]
+}
