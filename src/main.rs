@@ -5,7 +5,7 @@ pub use crossterm::{
     cursor::{self, position},
     event::{self, Event, KeyCode, KeyEvent, read, DisableMouseCapture, EnableMouseCapture},
     execute, queue, style,
-    terminal::{self, ClearType},
+    terminal::{self, size, ClearType},
     Command,
 };
 
@@ -87,7 +87,7 @@ where
             style::ResetColor,
             terminal::Clear(ClearType::All),
             cursor::Hide,
-            cursor::MoveTo(1, 1)
+            cursor::MoveTo(1, size()?.1 - 1)
         )?;
     execute!(w, EnableMouseCapture)?;
 
@@ -95,12 +95,18 @@ where
     while let Event::Key(KeyEvent { code, .. }) = event::read()? {
         match code {
             KeyCode::Enter => {
-                queue!(w, style::Print(&line))?;
+                if line == "quit"
+                {
+                    execute!(w, cursor::SetCursorStyle::DefaultUserShape).unwrap();
+                    break;
+                }
+                line = String::new();
             }
             KeyCode::Char(c) => {
                 line.push(c);
             }
             KeyCode::Esc => {
+                execute!(w, cursor::SetCursorStyle::DefaultUserShape).unwrap();
                 break;
             }
             _ => {}
