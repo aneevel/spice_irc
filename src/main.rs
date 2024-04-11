@@ -91,17 +91,19 @@ where
         )?;
     execute!(w, EnableMouseCapture)?;
 
-    loop {
-        let event = read()?;
-
-        println!("Event::{:?}\r", event);
-
-        if event == Event::Key(KeyCode::Char('c').into()) {
-            println!("Cursor position: {:?}\r", position());
-        }
-
-        if event == Event::Key(KeyCode::Char('q').into()) {
-            break;
+    let mut line = String::new();
+    while let Event::Key(KeyEvent { code, .. }) = event::read()? {
+        match code {
+            KeyCode::Enter => {
+                queue!(w, style::Print(&line))?;
+            }
+            KeyCode::Char(c) => {
+                line.push(c);
+            }
+            KeyCode::Esc => {
+                break;
+            }
+            _ => {}
         }
     }
 
